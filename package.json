@@ -1,6 +1,7 @@
 {
   "name": "e-employees",
   "private": true,
+  "homepage": "./",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

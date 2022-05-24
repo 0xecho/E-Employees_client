@@ -1,16 +1,5 @@
-import { AnyAction } from "@reduxjs/toolkit";
-
-interface Employee {
-    id: string,
-    name: string,
-    date_of_birth: Date,
-    gender: string,
-    salary: BigInteger
-}
-
-interface EmployeeState {
-    employees: Array<Employee>
-}
+import { AnyAction } from "@reduxjs/toolkit"
+import { EmployeeState } from "./types"
 
 const initial_state: EmployeeState = {
     employees: []

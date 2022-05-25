@@ -19,7 +19,7 @@ export async function delete_employee(employee: Employee) {
 }
 
 export async function update_employee(employee: Employee) {
-    return client.put(`/employees/${employee.id}`)
+    return client.put(`/employees/${employee.id}`, employee)
 }
 
 export default {

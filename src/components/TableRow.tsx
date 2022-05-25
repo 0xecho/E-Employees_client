@@ -3,7 +3,7 @@ import Button from "./Button"
 import { Employee } from "../store/types";
 import { dateToString, humanizeDateString, humanizeGender } from '../helpers'
 import { useDispatch } from "react-redux";
-import { delete_employee, update_employee } from '../store/slices/employeeSlice'
+import { delete_employee_requested, update_employee_requested } from '../store/slices/employeeSlice'
 
 type TableRowProps = {
     employee: Employee
@@ -25,7 +25,7 @@ export default function TableRow({ employee }: TableRowProps) {
 
     function saveEmployee() {
         toggleEdit()
-        dispatch(update_employee({
+        dispatch(update_employee_requested({
             id: employee.id,
             name,
             gender,
@@ -35,7 +35,7 @@ export default function TableRow({ employee }: TableRowProps) {
     }
     
     function deleteEmployee() {
-        dispatch(delete_employee(employee))
+        dispatch(delete_employee_requested(employee))
     }
 
     function updateDateOfBirth(event: React.ChangeEvent<HTMLInputElement> ) {

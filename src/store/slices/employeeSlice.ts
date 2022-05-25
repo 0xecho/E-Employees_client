@@ -9,10 +9,13 @@ export const employeeSlice = createSlice({
     name: 'employees',
     initialState,
     reducers: {
+        create_employee_requested: (state, action: PayloadAction<Employee>) => state,
+        delete_employee_requested: (state, action: PayloadAction<Employee>) => state,
+        update_employee_requested: (state, action: PayloadAction<Employee>) => state,
+
         create_employee: (state, action: PayloadAction<Employee>) => {
             state.employees.push({
                 ...action.payload,
-                id: Math.floor(Math.random() * 100).toString() //temporarily generate a random id 
             })
         },
         delete_employee: (state, action: PayloadAction<Employee>) => {
@@ -29,6 +32,13 @@ export const employeeSlice = createSlice({
     }
 })
 
-export const { create_employee, delete_employee, update_employee, set_employees} = employeeSlice.actions
+export const { 
+    create_employee, 
+    delete_employee, 
+    update_employee, 
+    set_employees,
+    create_employee_requested,
+    delete_employee_requested,
+    update_employee_requested } = employeeSlice.actions
 export type EmployeeAction = ReturnType<typeof create_employee>
 export default employeeSlice.reducer

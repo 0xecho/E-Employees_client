@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Button from "./Button"
 import { Employee } from "../store/types";
+import { dateToString, humanizeDateString } from '../helpers'
 
 type TableRowProps = {
     employee: Employee
@@ -28,11 +29,7 @@ export default function TableRow({ employee }: TableRowProps) {
 
     function updateDateOfBirth(event: React.ChangeEvent<HTMLInputElement> ) {
         let _date_of_birth: Date = new Date(event.target.valueAsNumber)
-        setDateOfBirth(_date_of_birth)
-    }
-
-    function dateToString(date: Date)  {
-        return date_of_birth.toISOString().split('T')[0];
+        setDateOfBirth(dateToString(_date_of_birth))
     }
 
     return <tr>
@@ -48,7 +45,7 @@ export default function TableRow({ employee }: TableRowProps) {
                             <option value="female">Female</option>
                         </select>
                     </td>
-                    <td><input type="date" value={dateToString(date_of_birth)} onChange={updateDateOfBirth} /></td>
+                    <td><input type="date" value={date_of_birth} onChange={updateDateOfBirth} /></td>
                     <td><input type="number" value={salary} onChange={e => setSalary(parseInt(e.target.value))} /></td>
                 </>
                 :
@@ -56,7 +53,7 @@ export default function TableRow({ employee }: TableRowProps) {
                     <td>{employee.id}</td>
                     <td>{name}</td>
                     <td>{gender}</td>
-                    <td>{date_of_birth.toDateString()}</td>
+                    <td>{humanizeDateString(date_of_birth)}</td>
                     <td>{salary}</td>
                 </>
         }

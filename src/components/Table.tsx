@@ -6,6 +6,7 @@ import { Employee } from '../store/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { create_employee, delete_employee, update_employee } from '../store/slices/employeeSlice';
 import { RootState } from '../store';
+import { dateToString } from '../helpers'
 
 export default function Table () {
 
@@ -18,7 +19,7 @@ export default function Table () {
             id: "1",
             name: "Elias Amha",
             gender: "Male",
-            date_of_birth: new Date(),
+            date_of_birth: dateToString(new Date()),
             salary: 75000
         }))
     }, [])

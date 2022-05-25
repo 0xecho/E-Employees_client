@@ -11,7 +11,10 @@ export const employeeSlice = createSlice({
     initialState,
     reducers: {
         create_employee: (state, action: PayloadAction<Employee>) => {
-            state.employees.push(action.payload)
+            state.employees.push({
+                ...action.payload,
+                id: Math.floor(Math.random() * 100).toString() //temporarily generate a random id 
+            })
         },
         delete_employee: (state, action: PayloadAction<Employee>) => {
             state.employees = state.employees.filter(employee => employee.id !== action.payload.id)

@@ -3,7 +3,7 @@ export interface Employee {
     name: string,
     date_of_birth: Date,
     gender: string,
-    salary: BigInteger
+    salary: number
 }
 
 export interface EmployeeState {

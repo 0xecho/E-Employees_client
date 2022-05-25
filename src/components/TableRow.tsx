@@ -1,7 +1,9 @@
 import { useState } from "react"
 import Button from "./Button"
 import { Employee } from "../store/types";
-import { dateToString, humanizeDateString } from '../helpers'
+import { dateToString, humanizeDateString, humanizeGender } from '../helpers'
+import { useDispatch } from "react-redux";
+import { delete_employee, update_employee } from '../store/slices/employeeSlice'
 
 type TableRowProps = {
     employee: Employee
@@ -15,16 +17,25 @@ export default function TableRow({ employee }: TableRowProps) {
     let [date_of_birth, setDateOfBirth] = useState(employee.date_of_birth)
     let [salary, setSalary] = useState(employee.salary)
 
+    let dispatch = useDispatch();
+
     function toggleEdit() {
         setEditing(!isEditing)
     }
 
     function saveEmployee() {
         toggleEdit()
+        dispatch(update_employee({
+            id: employee.id,
+            name,
+            gender,
+            date_of_birth,
+            salary            
+        }))
     }
     
     function deleteEmployee() {
-
+        dispatch(delete_employee(employee))
     }
 
     function updateDateOfBirth(event: React.ChangeEvent<HTMLInputElement> ) {
@@ -52,7 +63,7 @@ export default function TableRow({ employee }: TableRowProps) {
                 <>
                     <td>{employee.id}</td>
                     <td>{name}</td>
-                    <td>{gender}</td>
+                    <td>{humanizeGender(gender)}</td>
                     <td>{humanizeDateString(date_of_birth)}</td>
                     <td>{salary}</td>
                 </>

@@ -17,7 +17,7 @@ export const employeeSlice = createSlice({
             state.employees = state.employees.filter(employee => employee.id !== action.payload.id)
         },
         update_employee: (state, action: PayloadAction<Employee>) => {
-            state.employees.map(employee => {
+            state.employees = state.employees.map(employee => {
                 return employee.id === action.payload.id ? action.payload : employee
             })
         },

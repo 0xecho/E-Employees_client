@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { employee as employeeReducer } from './reducers'
+import employeeReducer from "./slices/employeeSlice";
 
-export default configureStore({
+export const store =  configureStore({
     reducer: {
         employeeReducer
     }
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export default store

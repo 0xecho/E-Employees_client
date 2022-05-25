@@ -3,23 +3,25 @@ import TableRow from './TableRow'
 import './Table.css'
 import { useEffect, useState } from 'react'
 import { Employee } from '../store/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { create_employee, delete_employee, update_employee } from '../store/slices/employeeSlice';
+import { RootState } from '../store';
 
 export default function Table () {
 
-    let [ employees, setEmployees ] = useState<Array<Employee>>([]);
+    const employees: Employee[] = useSelector((state: RootState) => state.employeeReducer.employees)
+    const dispath = useDispatch()
 
-    useEffect(()=>{
-        setEmployees([
-            {
-                id: "1",
-                name: "Elias Amha",
-                gender: "Male",
-                date_of_birth: new Date(),
-                salary: 75000
-            }
-        ])
-
-    },[])
+    useEffect(() => {
+        console.log("GOINT ")
+        dispath(create_employee({
+            id: "1",
+            name: "Elias Amha",
+            gender: "Male",
+            date_of_birth: new Date(),
+            salary: 75000
+        }))
+    }, [])
 
     return <table>
         <thead>

@@ -13,7 +13,7 @@ export default function TableRow({ employee }: TableRowProps) {
 
     let [isEditing, setEditing] = useState(false);
     let [name, setName] = useState(employee.name)
-    let [gender, setGender] = useState(employee.gender)
+    let [gender, setGender] = useState(employee.gender || "male")
     let [date_of_birth, setDateOfBirth] = useState(employee.date_of_birth)
     let [salary, setSalary] = useState(employee.salary)
 

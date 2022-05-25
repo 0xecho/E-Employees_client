@@ -8,5 +8,5 @@ export function humanizeDateString(dateString: string){
 }
 
 export function humanizeGender(gender: string)  {
-    return gender[0].toUpperCase() + gender.substring(1).toLowerCase()
+    return gender ? gender[0].toUpperCase() + gender.substring(1).toLowerCase() : ""
 }

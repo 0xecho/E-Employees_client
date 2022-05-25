@@ -11,17 +11,12 @@ import { dateToString } from '../helpers'
 export default function Table () {
 
     const employees: Employee[] = useSelector((state: RootState) => state.employeeReducer.employees)
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log("GOINT ")
-        dispath(create_employee({
-            id: "1",
-            name: "Elias Amha",
-            gender: "Male",
-            date_of_birth: dateToString(new Date()),
-            salary: 75000
-        }))
+    useEffect(()=>{
+        dispatch({
+            type: "employees/fetch_employee"
+        })
     }, [])
 
     return <table>

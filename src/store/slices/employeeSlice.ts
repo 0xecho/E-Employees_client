@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Employee, EmployeeState } from "../types";
 
-
 let initialState: EmployeeState = {
     employees: []
 }
@@ -24,8 +23,12 @@ export const employeeSlice = createSlice({
                 return employee.id === action.payload.id ? action.payload : employee
             })
         },
+        set_employees: (state, action: PayloadAction<Employee[]>) => {
+            state.employees = action.payload
+        },
     }
 })
 
-export const {create_employee, delete_employee, update_employee} = employeeSlice.actions
+export const { create_employee, delete_employee, update_employee, set_employees} = employeeSlice.actions
+export type EmployeeAction = ReturnType<typeof create_employee>
 export default employeeSlice.reducer

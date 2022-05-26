@@ -36,7 +36,7 @@ export default function Table () {
             {
                 isLoading
                 ? <tr><td colSpan={6}><Loading dots={3}></Loading></td></tr>
-                :employees.map(
+                : employees.map(
                     employee => <TableRow employee={employee} key={employee.id}></TableRow>
                 )
             }

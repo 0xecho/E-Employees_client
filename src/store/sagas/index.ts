@@ -18,7 +18,7 @@ function* create_employee_worker(action: EmployeeAction) {
             api.create_employee,
             action.payload
         )
-        yield put(create_employee(action.payload))
+        yield put(create_employee(response.data))
     }
     catch (error: any) {
         yield put(addAlert({
@@ -48,7 +48,7 @@ function* update_employee_worker(action: EmployeeAction) {
             api.update_employee,
             action.payload
         )
-        yield put(update_employee(action.payload))
+        yield put(update_employee(response.data))
     } catch (error: any) {
         yield put(addAlert({
             isError: true,

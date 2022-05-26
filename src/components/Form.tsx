@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Button from './Button'
-import { create_employee as create_employee_action } from '../store/slices/employeeSlice'
+import { create_employee_requested } from '../store/slices/employeeSlice'
 
 export default function Form() {
     let [name, setName] = useState("")
-    let [gender, setGender] = useState("")
+    let [gender, setGender] = useState("male")
     let [date_of_birth, setDateOfBirth] = useState("1999-01-01")
     let [salary, setSalary] = useState(0)
 
     let dispatch = useDispatch()
 
     function create_employee () {
-        dispatch(create_employee_action({
+        dispatch(create_employee_requested({
             name: name,
             gender: gender,
             date_of_birth: date_of_birth,

@@ -27,6 +27,7 @@ export default function Form() {
             date_of_birth: date_of_birth,
             salary: salary
         }))
+        close_modal()
     }
 
     function open_modal() {
@@ -42,12 +43,19 @@ export default function Form() {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={close_modal}
+                shouldCloseOnOverlayClick={true}
                 contentLabel="Create Employee"
                 className="modal"
             >
                 <div className="modal-container">
                     <div className="modal-header">
-                        <h2>Create Employee</h2>
+                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                            <h2>Create Employee</h2>
+                            <span style={{cursor: "pointer", width: "40px"}} onClick={close_modal}>
+                                <p>&times;</p>
+                            </span>
+                        </div>
+                        
                     </div>
                     <div className="modal-body">
                         <div className="form-group">
@@ -100,7 +108,7 @@ export default function Form() {
                                     <tr>
                                         <td colSpan={2}>
                                             <Button text="Create Employee" onClick={create_employee} />
-                                            <Button text="Cancel" onClick={close_modal} />
+                                            <Button text="Cancel" onClick={close_modal} backgroundColor="red" />
                                         </td>
                                     </tr>
                                 </tbody>

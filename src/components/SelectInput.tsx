@@ -16,8 +16,7 @@ const StyledSelectInput = styled.select`
     font-size: 1em;
     margin: 1em;
     padding: 0.25em 1em;
-
-    width: 113%;
+    
     height: 2em;
     
     &:focus {
@@ -29,8 +28,8 @@ const StyledSelectInput = styled.select`
 export default function SelectInput(props: SelectInputProps) {
     return <StyledSelectInput value={props.value} onChange={props.onChange}>
         {
-            props.options.map(option => (
-                <option value={option.value}>{option.text}</option>
+            props.options.map((option, idx) => (
+                <option value={option.value} key={idx}>{option.text}</option>
             ))
         }
     </StyledSelectInput>

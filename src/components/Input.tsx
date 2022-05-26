@@ -12,7 +12,6 @@ const StyledTextInput = styled.input`
     margin: 1em;
     padding: 0.25em 1em;
 
-    width: 100%;
     height: 1.5em;
     
     &:focus {

@@ -20,7 +20,7 @@ function* create_employee_worker(action: EmployeeAction) {
         )
         yield put(create_employee(action.payload))
     }
-    catch(error: any) {
+    catch (error: any) {
         yield put(addAlert({
             isError: true,
             message: `Could not create employee: ${error.message}`
@@ -33,7 +33,7 @@ function* fetch_employee_worker() {
         const response: SagaReturnType<typeof api.fetch_employees> = yield call(
             api.fetch_employees
         )
-        yield put(set_employees(response.data))   
+        yield put(set_employees(response.data))
     } catch (error: any) {
         yield put(addAlert({
             isError: true,

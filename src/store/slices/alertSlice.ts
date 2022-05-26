@@ -14,8 +14,9 @@ const alertSlice = createSlice({
         addAlert: (state, action: PayloadAction<Alert>) => {
             state.push(action.payload);
         },
-        removeAlert: (state, action: PayloadAction<Alert>) => {
-            state = state.filter(alert => alert.message !== action.payload.message);
+        removeAlert: (state, action: PayloadAction<Alert>) => {            
+            let new_state = state.filter(alert => alert.message !== action.payload.message)
+            state.splice(0, state.length, ...new_state);
         }
     }
 });

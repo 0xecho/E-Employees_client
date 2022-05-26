@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IEmployee, IEmployeeUnsaved, EmployeeState } from "../types";
+import { fetch_employees } from "../api";
+import { IEmployee, IEmployeeUnsaved, EmployeeState, Pagination } from "../types";
 
 let initialState: EmployeeState = {
     employees: [],
-    isLoading: false
+    isLoading: false,
+    page: 1,
+    totalPages: 0,
 }
 
 export const employeeSlice = createSlice({
@@ -39,6 +42,12 @@ export const employeeSlice = createSlice({
             state.employees = action.payload
             state.isLoading = false
         },
+        set_total_pages: (state, action: PayloadAction<number>) => {
+            state.totalPages = action.payload
+        },
+        set_page: (state, action: PayloadAction<number>) => {
+            state.page = action.payload
+        }
     }
 })
 
@@ -47,6 +56,8 @@ export const {
     delete_employee, 
     update_employee, 
     set_employees,
+    set_page,
+    set_total_pages,
     create_employee_requested,
     delete_employee_requested,
     update_employee_requested } = employeeSlice.actions

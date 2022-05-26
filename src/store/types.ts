@@ -12,5 +12,18 @@ export interface IEmployee extends IEmployeeUnsaved {
 
 export interface EmployeeState {
     employees: Array<IEmployee>,
-    isLoading: boolean
+    isLoading: boolean,
+    page: number,
+    totalPages: number,
+}
+
+export interface Pagination {
+    page: number,
+    limit: number
+}
+
+export interface PaginatedEmployees {
+    employees: Array<IEmployee>,
+    page: number,
+    totalPages: number,
 }

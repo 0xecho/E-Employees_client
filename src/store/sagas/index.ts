@@ -3,6 +3,8 @@ import api from '../api'
 import {
     EmployeeAction,
     set_employees,
+    set_total_pages,
+    set_page,
     create_employee,
     update_employee,
     delete_employee
@@ -11,6 +13,8 @@ import {
     addAlert,
     AlertAction
 } from '../slices/alertSlice'
+import { Pagination } from '../types'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 function* create_employee_worker(action: EmployeeAction) {
     try {
@@ -28,12 +32,15 @@ function* create_employee_worker(action: EmployeeAction) {
     }
 }
 
-function* fetch_employee_worker() {
+function* fetch_employee_worker(action: PayloadAction<Pagination>) {
     try {
+        const pagination = action.payload ? action.payload : { page: 1, limit: 10 }
         const data: SagaReturnType<typeof api.fetch_employees> = yield call(
-            api.fetch_employees
+            api.fetch_employees,
+            pagination
         )
-        yield put(set_employees(data))
+        yield put(set_employees(data.employees))
+        yield put(set_total_pages(data.totalPages))
     } catch (error: any) {
         yield put(addAlert({
             isError: true,

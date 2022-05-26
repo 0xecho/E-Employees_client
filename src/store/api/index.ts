@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { IEmployee, IEmployeeUnsaved } from '../types'
+import { IEmployee, IEmployeeUnsaved, Pagination, PaginatedEmployees } from '../types'
 
 export const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE
@@ -10,13 +10,13 @@ export async function create_employee(employee: IEmployeeUnsaved): Promise<IEmpl
     return client.post('/employees', employee).then(response => response.data)
 }
 
-export async function fetch_employees(): Promise<IEmployee[]> {
-    return client.get('/employees').then(response => response.data).then(
-        (employees: IEmployee[]) => employees.map((employee: IEmployee, idx: number) => ({
-            ...employee,
-            id: idx + 1
+export async function fetch_employees(pagination: Pagination): Promise<PaginatedEmployees> {
+    return client.get(`/employees?page=${pagination.page}&limit=${pagination.limit}`)
+        .then(response => response.data)
+        .then(data => ({
+            ...data,
+            employees: data.employees.map((employee: IEmployee, idx: number) => { return { ...employee, id: idx + 1} }),
         }))
-    )
 }
 
 export async function delete_employee(employee: IEmployee): Promise<IEmployee> {

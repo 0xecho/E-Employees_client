@@ -15,7 +15,10 @@ function App() {
     <>
       <Alerts></Alerts>
       <Form></Form>
-      <Table></Table>
+      {/* centered page with css */}
+      <div className="container">
+          <Table></Table>
+      </div>
 
     </>
   )

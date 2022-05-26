@@ -3,7 +3,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { addAlert, Alert } from '../store/slices/alertSlice'
 import { removeAlert } from '../store/slices/alertSlice'
-import { shallowEqual } from 'react-redux'
+import styled from 'styled-components'
+
+const AlertBox = styled.div`
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+`
+const CloseButton = styled.span`
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+        color: black;
+    }
+`
 
 export default function Alerts() {
 
@@ -18,13 +38,16 @@ export default function Alerts() {
         })
     }, [alerts])
 
+
     return <div className="alerts">
         {
             alerts.map(
-                (alert, idx) => <div key={idx} className={`alert alert-${alert.isError ? 'danger' : 'success'}`}>
-                    {alert.message}
-                    <button onClick={() => dispatch(removeAlert(alert))}>X</button>
-                    </div>
+                (alert, idx) => <div key={idx}>
+                    <AlertBox>
+                        <CloseButton onClick={() => dispatch(removeAlert(alert))}>&times;</CloseButton>
+                        {alert.message}
+                    </AlertBox>
+                </div>
             )
         }
     </div>

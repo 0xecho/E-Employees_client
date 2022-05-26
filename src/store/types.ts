@@ -7,5 +7,6 @@ export interface Employee {
 }
 
 export interface EmployeeState {
-    employees: Array<Employee>
+    employees: Array<Employee>,
+    isLoading: boolean
 }

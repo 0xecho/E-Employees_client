@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Employee, EmployeeState } from "../types";
 
 let initialState: EmployeeState = {
-    employees: []
+    employees: [],
+    isLoading: false
 }
 
 export const employeeSlice = createSlice({
@@ -13,6 +14,9 @@ export const employeeSlice = createSlice({
         delete_employee_requested: (state, action: PayloadAction<Employee>) => state,
         update_employee_requested: (state, action: PayloadAction<Employee>) => state,
 
+        fetch_employee: (state) => {
+            state.isLoading = true
+        },
         create_employee: (state, action: PayloadAction<Employee>) => {
             state.employees.push({
                 ...action.payload,
@@ -28,6 +32,7 @@ export const employeeSlice = createSlice({
         },
         set_employees: (state, action: PayloadAction<Employee[]>) => {
             state.employees = action.payload
+            state.isLoading = false
         },
     }
 })

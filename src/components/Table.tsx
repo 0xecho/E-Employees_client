@@ -1,4 +1,5 @@
 import Button from './Button'
+import Loading from './Loading'
 import TableRow from './TableRow'
 import './Table.css'
 import { useEffect, useState } from 'react'
@@ -11,6 +12,7 @@ import { dateToString } from '../helpers'
 export default function Table () {
 
     const employees: Employee[] = useSelector((state: RootState) => state.employeeReducer.employees)
+    const isLoading: boolean = useSelector((state: RootState) => state.employeeReducer.isLoading)
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -32,7 +34,9 @@ export default function Table () {
         </thead>
         <tbody>
             {
-                employees.map(
+                isLoading
+                ? <tr><td colSpan={6}><Loading dots={3}></Loading></td></tr>
+                :employees.map(
                     employee => <TableRow employee={employee} key={employee.id}></TableRow>
                 )
             }

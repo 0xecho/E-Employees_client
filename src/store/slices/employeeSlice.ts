@@ -1,33 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Employee, EmployeeState } from "../types";
+import { IEmployee, IEmployeeUnsaved, EmployeeState } from "../types";
 
 let initialState: EmployeeState = {
-    employees: []
+    employees: [],
+    isLoading: false
 }
 
 export const employeeSlice = createSlice({
     name: 'employees',
     initialState,
     reducers: {
-        create_employee_requested: (state, action: PayloadAction<Employee>) => state,
-        delete_employee_requested: (state, action: PayloadAction<Employee>) => state,
-        update_employee_requested: (state, action: PayloadAction<Employee>) => state,
+        create_employee_requested: (state, action: PayloadAction<IEmployeeUnsaved>) => state,
+        delete_employee_requested: (state, action: PayloadAction<IEmployee>) => state,
+        update_employee_requested: (state, action: PayloadAction<IEmployee>) => state,
 
-        create_employee: (state, action: PayloadAction<Employee>) => {
+        fetch_employee: (state) => {
+            state.isLoading = true
+        },
+        create_employee: (state, action: PayloadAction<IEmployee>) => {
             state.employees.push({
                 ...action.payload,
             })
         },
-        delete_employee: (state, action: PayloadAction<Employee>) => {
-            state.employees = state.employees.filter(employee => employee.id !== action.payload.id)
+        delete_employee: (state, action: PayloadAction<IEmployee>) => {
+            state.employees = state.employees.filter(employee => employee._id !== action.payload._id)
         },
-        update_employee: (state, action: PayloadAction<Employee>) => {
+        update_employee: (state, action: PayloadAction<IEmployee>) => {
             state.employees = state.employees.map(employee => {
-                return employee.id === action.payload.id ? action.payload : employee
+                return employee._id === action.payload._id 
+                        ? {
+                            ...employee,
+                            ...action.payload
+                        }
+                        : employee
             })
         },
-        set_employees: (state, action: PayloadAction<Employee[]>) => {
+        set_employees: (state, action: PayloadAction<IEmployee[]>) => {
             state.employees = action.payload
+            state.isLoading = false
         },
     }
 })

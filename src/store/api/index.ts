@@ -1,25 +1,30 @@
 import axios from "axios"
 
-import { Employee } from '../types'
+import { IEmployee, IEmployeeUnsaved } from '../types'
 
 export const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE
 })
 
-export async function create_employee(employee: Employee) {
-    return client.post('/employees', employee)
+export async function create_employee(employee: IEmployeeUnsaved): Promise<IEmployee> {
+    return client.post('/employees', employee).then(response => response.data)
 }
 
-export async function fetch_employees() {
-    return client.get('/employees')
+export async function fetch_employees(): Promise<IEmployee[]> {
+    return client.get('/employees').then(response => response.data).then(
+        (employees: IEmployee[]) => employees.map((employee: IEmployee, idx: number) => ({
+            ...employee,
+            id: idx + 1
+        }))
+    )
 }
 
-export async function delete_employee(employee: Employee) {
-    return client.delete(`/employees/${employee.id}`)
+export async function delete_employee(employee: IEmployee): Promise<IEmployee> {
+    return client.delete(`/employees/${employee._id}`).then(response => response.data)
 }
 
-export async function update_employee(employee: Employee) {
-    return client.put(`/employees/${employee.id}`, employee)
+export async function update_employee(employee: IEmployee): Promise<IEmployee> {    
+    return client.put(`/employees/${employee._id}`, employee).then(response => response.data)
 }
 
 export default {

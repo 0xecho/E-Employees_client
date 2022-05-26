@@ -1,11 +1,33 @@
+import styled from 'styled-components'
+
 type ButtonProps = {
     text?: string,
+    color?: string,
+    backgroundColor?: string,
     onClick?(event: React.MouseEvent<HTMLButtonElement>): void,
 }
-export default function Button({ text = "Button :)", onClick = ()=>{} }: ButtonProps) {
+
+const StyledButton = styled.button<ButtonProps>`
+    background-color: ${(props: ButtonProps)=> props.backgroundColor || 'green'};
+    color: ${(props: ButtonProps)=> props.color || 'white'};
+    
+    &:hover {
+        background-color: ${(props: ButtonProps) => props.color || 'white'};
+        color: ${(props: ButtonProps) => props.backgroundColor || 'green'};
+    }
+
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid;
+    border-radius: 3px;
+`
+
+export default function Button(props: ButtonProps) {
+
     return (
-        <button onClick={onClick}>
-            { text }
-        </button>
+        <StyledButton onClick={props.onClick} {...props} >
+            { props.text }
+        </StyledButton>
     )
 }

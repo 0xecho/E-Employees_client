@@ -14,8 +14,10 @@ function App() {
   return (
     <>
       <Alerts></Alerts>
-      <Form></Form>
-      <Table></Table>
+      <div className="container">
+          <Form></Form>
+          <Table></Table>
+      </div>
 
     </>
   )

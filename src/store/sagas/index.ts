@@ -14,11 +14,11 @@ import {
 
 function* create_employee_worker(action: EmployeeAction) {
     try {
-        const response: SagaReturnType<typeof api.create_employee> = yield call(
+        const data: SagaReturnType<typeof api.create_employee> = yield call(
             api.create_employee,
             action.payload
         )
-        yield put(create_employee(action.payload))
+        yield put(create_employee(data))
     }
     catch (error: any) {
         yield put(addAlert({
@@ -30,10 +30,10 @@ function* create_employee_worker(action: EmployeeAction) {
 
 function* fetch_employee_worker() {
     try {
-        const response: SagaReturnType<typeof api.fetch_employees> = yield call(
+        const data: SagaReturnType<typeof api.fetch_employees> = yield call(
             api.fetch_employees
         )
-        yield put(set_employees(response.data))
+        yield put(set_employees(data))
     } catch (error: any) {
         yield put(addAlert({
             isError: true,
@@ -44,11 +44,11 @@ function* fetch_employee_worker() {
 
 function* update_employee_worker(action: EmployeeAction) {
     try {
-        const response: SagaReturnType<typeof api.update_employee> = yield call(
+        const data: SagaReturnType<typeof api.update_employee> = yield call(
             api.update_employee,
             action.payload
         )
-        yield put(update_employee(action.payload))
+        yield put(update_employee(data))
     } catch (error: any) {
         yield put(addAlert({
             isError: true,
@@ -59,7 +59,7 @@ function* update_employee_worker(action: EmployeeAction) {
 
 function* delete_employee_worker(action: EmployeeAction) {
     try {
-        const response: SagaReturnType<typeof api.delete_employee> = yield call(
+        const data: SagaReturnType<typeof api.delete_employee> = yield call(
             api.delete_employee,
             action.payload
         )

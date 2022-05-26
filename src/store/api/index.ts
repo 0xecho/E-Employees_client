@@ -6,6 +6,18 @@ export const client = axios.create({
     baseURL: import.meta.env.VITE_API_BASE
 })
 
+client.interceptors.response.use(
+    response => response,
+    error => {
+        let errors = error.response.data ? error.response.data.error : { "message": error.message }
+        let errorMessage = ""
+        for (let key in errors) {
+            errorMessage += `\n${errors[key]}`
+        }
+        throw new Error(errorMessage)
+    }
+)
+
 export async function create_employee(employee: IEmployeeUnsaved): Promise<IEmployee> {
     return client.post('/employees', employee).then(response => response.data)
 }

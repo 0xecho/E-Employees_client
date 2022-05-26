@@ -23,7 +23,7 @@ function* create_employee_worker(action: EmployeeAction) {
     catch (error: any) {
         yield put(addAlert({
             isError: true,
-            message: `Could not create employee: ${error.message}`
+            message: `Could not create employee: ${error}`
         }))
     }
 }
@@ -37,7 +37,7 @@ function* fetch_employee_worker() {
     } catch (error: any) {
         yield put(addAlert({
             isError: true,
-            message: `Could not fetch employees: ${error.message}`
+            message: `Could not fetch employees: ${error}`
         }))
     }
 }
@@ -52,7 +52,7 @@ function* update_employee_worker(action: EmployeeAction) {
     } catch (error: any) {
         yield put(addAlert({
             isError: true,
-            message: `Could not update employee: ${error.message}`
+            message: `Could not update employee: ${error}`
         }))
     }
 }
@@ -67,7 +67,7 @@ function* delete_employee_worker(action: EmployeeAction) {
     } catch (error: any) {
         yield put(addAlert({
             isError: true,
-            message: `Could not delete employee: ${error.message}`
+            message: `Could not delete employee: ${error}`
         }))
     }
 }

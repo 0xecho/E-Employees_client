@@ -27,7 +27,12 @@ export const employeeSlice = createSlice({
         },
         update_employee: (state, action: PayloadAction<IEmployee>) => {
             state.employees = state.employees.map(employee => {
-                return employee._id === action.payload._id ? action.payload : employee
+                return employee._id === action.payload._id 
+                        ? {
+                            ...employee,
+                            ...action.payload
+                        }
+                        : employee
             })
         },
         set_employees: (state, action: PayloadAction<IEmployee[]>) => {

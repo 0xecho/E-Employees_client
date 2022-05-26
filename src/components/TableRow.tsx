@@ -1,12 +1,12 @@
 import { useState } from "react"
 import Button from "./Button"
-import { Employee } from "../store/types";
+import { IEmployee } from "../store/types";
 import { dateToString, humanizeDateString, humanizeGender } from '../helpers'
 import { useDispatch } from "react-redux";
 import { delete_employee_requested, update_employee_requested } from '../store/slices/employeeSlice'
 
 type TableRowProps = {
-    employee: Employee
+    employee: IEmployee
 }
 
 export default function TableRow({ employee }: TableRowProps) {
@@ -26,11 +26,11 @@ export default function TableRow({ employee }: TableRowProps) {
     function saveEmployee() {
         toggleEdit()
         dispatch(update_employee_requested({
-            id: employee.id,
             name,
             gender,
             date_of_birth,
-            salary            
+            salary,
+            _id: employee._id
         }))
     }
     

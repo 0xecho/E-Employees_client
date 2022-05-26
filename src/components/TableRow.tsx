@@ -73,13 +73,13 @@ export default function TableRow({ employee }: TableRowProps) {
                 isEditing
                     ?
                     <>
-                        <Button text="Save" onClick={saveEmployee}></Button>
-                        <Button text="Cancel" onClick={toggleEdit}></Button>
+                        <Button text="Save" onClick={saveEmployee} backgroundColor="white" color="green"/>
+                        <Button text="Cancel" onClick={toggleEdit} backgroundColor="white" color="red" />
                     </>
                     :
                     <>
-                        <Button text="Delete" onClick={deleteEmployee}></Button>
-                        <Button text="Edit" onClick={toggleEdit}></Button>
+                        <Button text="Edit" onClick={toggleEdit} backgroundColor="white" color="blue"></Button>
+                        <Button text="Delete" onClick={deleteEmployee} backgroundColor="white" color="red"></Button>
                     </>
             }
         </td>

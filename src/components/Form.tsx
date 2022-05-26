@@ -37,7 +37,7 @@ export default function Form() {
             <label htmlFor="date_of_birth">Date of Birth</label>
             <input value={date_of_birth} type="date" name="date_of_birth" onChange={e => setDateOfBirth(e.target.value)}/>
             <hr />
-            <Button text="Create Employee" onClick={create_employee} />
+            <Button text="Create Employee" onClick={create_employee} backgroundColor="white" color="green" />
         </div>
     )
 }
